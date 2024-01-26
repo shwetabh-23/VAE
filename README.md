@@ -11,7 +11,7 @@ The encoder maps input data into a latent space, where each dimension represents
 
 The latent space is a lower-dimensional representation where data is assumed to follow a certain distribution (often Gaussian).
 It allows for efficient sampling and interpolation between data points.
-V### ariational Inference:
+### Variational Inference:
 
 VAEs use variational inference to estimate the posterior distribution of the latent space.
 This involves introducing a probabilistic element to the model, making it stochastic.
@@ -26,17 +26,17 @@ Define the architecture and hyperparameters in a configuration file (e.g., YAML)
 Design the VAE architecture, specifying the number of layers, channels, kernel sizes, etc.
 Define the encoder and decoder structures, often using convolutional layers.
 ### Training:
-ataset Loading:
+### dataset Loading:
 
 Load the dataset (e.g., MNIST) for training and testing.
-Encoder Training:
+### Encoder Training:
 
 Train the encoder to map input data to the latent space.
 Utilize variational inference to model the latent distribution.
-Decoder Training:
+### Decoder Training:
 
 Train the decoder to reconstruct input data from the latent space.
-Loss Function:
+### Loss Function:
 
 Define a loss function that combines the reconstruction loss and the divergence between the estimated and true posterior.
 Backpropagation:
