@@ -1,0 +1,18 @@
+configuration:
+  ds_method: 'MNIST'
+  ds_shape:  [1, 28, 28]
+  ds_path: 'data/'
+
+
+architecture:
+  conv_layers: 3
+  conv_channels: [128, 256, 512]
+  conv_kernel_size: [[7, 7], [7, 7], [5, 5]]
+  conv_stride: [[1, 1], [1, 1], [1, 1]]
+  conv_paddings: [[1, 1], [1, 1], [1, 1]]
+  z_dimension: 2
+
+hyperparameters:
+  epochs: 10
+  batch_size: 16
+  learning_rate: 3e-06

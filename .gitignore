@@ -5,7 +5,9 @@ __pycache__/
 
 # C extensions
 *.so
-
+model.pth
+data/
+lightning_logs/
 # Distribution / packaging
 .Python
 build/
