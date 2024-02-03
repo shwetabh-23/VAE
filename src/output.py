@@ -34,4 +34,4 @@ if __name__ == '__main__':
     encoder, encoder_shape = create_encoder(architecture=architecture, input_shape=in_shape)
     
     decoder = create_decoder(architecture=architecture, encoder_shape= encoder_shape)
-    final_layer = output_layer(architecture=architecture, input_shape= in_shape)
+    final_layer = create_output_layer(architecture=architecture, input_shape= in_shape)

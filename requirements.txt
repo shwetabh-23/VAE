@@ -1,1 +1,3 @@
 pytorch-lightning
+pytorch-lightning tensorboard
+scikit-learn

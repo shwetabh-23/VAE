@@ -1,6 +1,6 @@
 configuration:
   ds_method: 'MNIST'
-  ds_shape:  [1, 28, 28]
+  ds_shape:  [1, 28,28]
   ds_path: 'data/'
 
 
@@ -13,6 +13,6 @@ architecture:
   z_dimension: 2
 
 hyperparameters:
-  epochs: 10
-  batch_size: 16
+  epochs: 15
+  batch_size: 32
   learning_rate: 3e-06
