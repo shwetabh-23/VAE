@@ -12,15 +12,14 @@ import numpy as np
 with open('config.yaml', 'r') as f:
         file = yaml.safe_load(f)
 
-
 os.makedirs('data', exist_ok= True)
 model = VAE(file= file)
 
-bottleneck_layer_size = '2'
-model_path = f'/home/harsh/AI-Projects/VAE/models/mnist/size_variation/{bottleneck_layer_size}/model.pth'
+bottleneck_layer_size = '64'
+model_path = f'/home/harsh/AI-Projects/VAE/models/cifar/size_variation/{bottleneck_layer_size}/model.pth'
 #breakpoint()
 logger = TensorBoardLogger(model_path[:-9] + 'logs/', name= 'modelv1')
-
+pca = PCA(n_components= 2)
 state_dict = torch.load(model_path)
 model.load_state_dict(state_dict=state_dict)
 
@@ -42,18 +41,26 @@ def get_weights_visualization():
     plt.show()
 
 def get_class_visualization():
-    trainer = pl.Trainer(logger= logger)
-    #result = trainer.test(model)
     all_means = []
     for i in range(0, 10):
 
-        latent_vector = model.get_latent_vectors(16, i)
+        latent_vector = model.get_latent_vectors(25, i)
         latent_vector = latent_vector.detach().numpy()
-        x_mean = latent_vector[:, 0].mean()
-        y_mean = latent_vector[:, 1].mean()
-        all_means.append((x_mean, y_mean))
+        if latent_vector.shape[1] > 2:
+            pca = PCA(n_components= 2)
+
+            pca_results = pca.fit_transform(latent_vector)
+
+            x_mean = pca_results[:, 0].mean()
+            y_mean = pca_results[:, 1].mean()
+            all_means.append((x_mean, y_mean))
+        else:
+            x_mean = latent_vector[:, 0].mean()
+            y_mean = latent_vector[:, 1].mean()
+            all_means.append((x_mean, y_mean))
 
     #x_values, y_values = zip(*all_means)
+    #breakpoint()
 
 # Plot the data
     digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -85,17 +92,19 @@ def get_class_visualization():
 
     # Display information on the graph
     for digit, (x, y) in mean_vectors.items():
-        plt.text(x, y, f'Digit {digit}', fontsize=8, ha='right', va='bottom')
+        plt.text(x, y, f'Class {digit}', fontsize=8, ha='right', va='bottom')
 
     # Set labels and title
     ax.set_xlabel('Mean X')
     ax.set_ylabel('Mean Y')
-    ax.set_title('Mean Latent Space Representations for Each Digit')
+    ax.set_title('Mean Latent Space Representations for Each Class')
 
     # Display legend
     ax.legend(loc='upper right', bbox_to_anchor=(1.25, 1))
 
     # Show the plot
+    plt.savefig('your_figure2.jpg', format='jpg', bbox_inches='tight')
+
     plt.show()
 if __name__ == '__main__':
      get_class_visualization()

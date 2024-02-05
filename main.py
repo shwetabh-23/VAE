@@ -13,15 +13,9 @@ with open('config.yaml', 'r') as f:
 os.makedirs('data', exist_ok= True)
 model = VAE(file= file)
 
-bottleneck_layer_size = '10'
-model_path = f'/home/harsh/AI-Projects/VAE/models/mnist/size_variation/{bottleneck_layer_size}/model.pth'
-#breakpoint()
+bottleneck_layer_size = '256'
+model_path = f'/home/harsh/AI-Projects/VAE/models/cifar/size_variation/{bottleneck_layer_size}/model.pth'
 logger = TensorBoardLogger(model_path[:-9] + 'logs/', name= 'modelv1')
-
-state_dict = torch.load(model_path)
-model.load_state_dict(state_dict=state_dict)
-trainer = pl.Trainer(logger= logger)
-result = trainer.test(model)
 
 if not os.path.exists(model_path):
 

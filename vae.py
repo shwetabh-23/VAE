@@ -258,21 +258,23 @@ class VAE(pl.LightningModule):
         number_vector = []
         
         tensors = []
-        #breakpoint()
+        
         while n*n > images:
             batch, y = next(iter(self.testdataloader))
+
             for i, vector in enumerate(batch):
                 if y[i] ==number:
 
                     #breakpoint()
                     number_vector.append(vector)
             images += len(batch)
-        #number_vector = torch.cat(tensors= number_vector, dim=0)
+        #breakpoint()
+        # if number == 8:
+        #     breakpoint()
         number_vector = torch.tensor(np.array(number_vector))
         mean, stddev = self.encode(number_vector)
 
         latent_vector = self.compute_latent_vector(mean=mean, stddev= stddev)
-
         return latent_vector
 
     def on_train_epoch_end(self):

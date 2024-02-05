@@ -1,6 +1,6 @@
 configuration:
-  ds_method: 'MNIST'
-  ds_shape:  [1, 28,28]
+  ds_method: 'CIFAR10'
+  ds_shape:  [3, 32, 32]
   ds_path: 'data/'
 
 
@@ -10,7 +10,8 @@ architecture:
   conv_kernel_size: [[7, 7], [7, 7], [5, 5]]
   conv_stride: [[1, 1], [1, 1], [1, 1]]
   conv_paddings: [[1, 1], [1, 1], [1, 1]]
-  z_dimension: 2
+  z_dimension: 256
+
 
 hyperparameters:
   epochs: 15

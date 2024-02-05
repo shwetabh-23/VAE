@@ -1,3 +1,6 @@
 pytorch-lightning
-pytorch-lightning tensorboard
+pytorch-lightning 
+tensorboard
 scikit-learn
+lpips
+pytorch-fid
